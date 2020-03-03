@@ -81,3 +81,27 @@ Post Request Expect An Error And Evaluate Response
     [Tags]  post
     ${resp}=    POST On Session  ${SESSION}  /status/401  expected_status=401
     Should Be Equal As Strings  UNAUTHORIZED  ${resp.reason}
+
+Put Request On Existing Session
+    [Tags]  put
+    ${resp}=            PUT On Session  ${SESSION}  /anything
+    Status Should Be    OK  ${resp}
+
+Put Request With Data
+    [Tags]  put
+    ${resp}=            PUT On Session  ${SESSION}  /anything  string
+    Status Should Be    OK  ${resp}
+    Should Be Equal As Strings  ${resp.json()}[data]  string
+
+Put Request With Json
+    [Tags]  put
+    ${body}=            Create Dictionary  a=1  b=2
+    ${resp}=            PUT On Session  ${SESSION}  /anything  json=${body}
+    Status Should Be    OK  ${resp}
+    ${data}=            To Json  ${resp.json()}[data]
+    Dictionaries Should Be Equal  ${data}  ${body}
+
+Put Request Expect An Error And Evaluate Response
+    [Tags]  put
+    ${resp}=    PUT On Session  ${SESSION}  /status/401  expected_status=401
+    Should Be Equal As Strings  UNAUTHORIZED  ${resp.reason}
