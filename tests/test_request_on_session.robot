@@ -103,15 +103,10 @@ Put Request With Json
     ${body}=            Create Dictionary  a=1  b=2
     ${resp}=            PUT On Session  ${SESSION}  /anything  json=${body}
     Status Should Be    OK  ${resp}
-    ${data}=            To Json  ${resp.json()}[data]git 
+    ${data}=            To Json  ${resp.json()}[data]
     Dictionaries Should Be Equal  ${data}  ${body}
 
 Put Request Expect An Error And Evaluate Response
     [Tags]  put
     ${resp}=    PUT On Session  ${SESSION}  /status/401  expected_status=401
     Should Be Equal As Strings  UNAUTHORIZED  ${resp.reason}
-
-Post Request Expect Anything Status And Continue On Error
-    [Tags]  put
-    ${resp}=    PUT On Session  ${SESSION}  /status/400  expected_status=anything
-    Should Be Equal As Strings  BAD REQUEST  ${resp.reason}
