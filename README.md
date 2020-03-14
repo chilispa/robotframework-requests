@@ -14,22 +14,22 @@ pip install -U robotframework-requests
 ```
 
 Here is a sample test case:
+                                                                                                                
+```robotframework
+*** Settings ***                                                                                               
+Library             Collections                                                                                
+Library             RequestsLibrary                                                                            
 
-|                    |                                 |                     |                       |               |
-| ----------------   | ------------------------------- | ------------------- | --------------------- | ------------- |
-| *** Settings ***   |                                 |                     |                       |               |
-| Library            | Collections                     |                     |                       |               |
-| Library            | RequestsLibrary                 |                     |                       |               |
-| *** Test Cases *** |                                 |                     |                       |               |
-| Get Requests       |                                 |                     |                       |               |
-|                    | Create Session                  | github              | http://api.github.com |               |
-|                    | Create Session                  | google              | http://www.google.com |               |
-|                    | ${resp}=                        | Get Request         | google                | /             |
-|                    | Should Be Equal As Strings      | ${resp.status_code} | 200                   |               |
-|                    | ${resp}=                        | Get Request         | github                | /users/bulkan |
-|                    | Should Be Equal As Strings      | ${resp.status_code} | 200                   |               |
-|                    | Dictionary Should Contain Value | ${resp.json()}      | Bulkan Evcimen        |               |
-
+*** Test Cases ***                                                                                             
+Get Requests                                                                                                   
+     Create Session                   github               http://api.github.com                
+     Create Session                   google               http://www.google.com                
+     ${resp}=                         Get Request          google                 /             
+     Should Be Equal As Strings       ${resp.status_code}  200                                  
+     ${resp}=                         Get Request          github                 /users/bulkan 
+     Should Be Equal As Strings       ${resp.status_code}  200                                  
+     Dictionary Should Contain Value  ${resp.json()}       Bulkan Evcimen                       
+```
 RequestsLibrary tries to follow the same API as requests. In the above example, we load in the ``RequestsLibrary`` using the ``Library`` keyword. To be able to distinguish HTTP requests to different hosts and for ease of creation of test cases, you need to create a `Session`. Internally this will create a `request.Session` object.  The `Create Session` keyword accepts two arguments:
 
 * _alias_ to identify the session later
@@ -46,29 +46,30 @@ After we create a Session we can send any of the following ``Get, Post, Put, Pat
 
 Here is another test case where an outbound http proxy is used.
 
-|                    |                            |                     |                          |                           |
-| ----------------   | -------------------------- | ------------------- | ------------------------ | ------------------------- |
-| *** Settings ***   |                            |                     |                          |                           |
-| Library            | RequestsLibrary            |                     |                          |                           |
-| *** Test Cases *** |                            |                     |                          |                           |
-| Proxy Requests     |                            |                     |                          |                           |
-|                    | ${proxies}=                | Create Dictionary   | http=http://acme.com:912 | https=http://acme.com:913 |
-|                    | Create Session             | github              | http://api.github.com    | proxies=${proxies}        |
-|                    | ${resp}=                   | Get Request         | github                   | /                         |
-|                    | Should Be Equal As Strings | ${resp.status_code} | 200                      |                           |
+```robotframework
+*** Settings ***                                                                                                         
+Library             RequestsLibrary                                                                                      
+*** Test Cases ***                                                                                                       
+Proxy Requests                                                                                                           
+    ${proxies}=                 Create Dictionary    http=http://acme.com:912  https=http://acme.com:913 
+    Create Session              github               http://api.github.com     proxies=${proxies}        
+    ${resp}=                    Get Request          github                    /                         
+    Should Be Equal As Strings  ${resp.status_code}  200                                                 
+```
 
 Another test case where cookies are sent in the request headers:
 
-|                    |                            |                     |                          |                           |
-| ----------------   | -------------------------- | ------------------- | ------------------------ | ------------------------- |
-| *** Settings ***   |                            |                     |                          |                           |
-| Library            | RequestsLibrary            |                     |                          |                           |
-| *** Test Cases *** |                            |                     |                          |                           |
-| Cookies in request |                            |                     |                          |                           |
-|                    | ${cookies}=                | Create Dictionary   | userid=1234567           | last_visit=2017-12-22     |
-|                    | Create Session             | github              | http://api.github.com    | cookies=${cookies}        |
-|                    | ${resp}=                   | Get Request         | github                   | /                         |
-|                    | Should Be Equal As Strings | ${resp.status_code} | 200                      |                           |
+```robotframework
+*** Settings ***                                                                                                         
+Library    RequestsLibrary                                                                                      
+ 
+*** Test Cases ***                                                                                                       
+Cookies in request                                                                                                       
+    ${cookies}=                 Create Dictionary    userid=1234567            last_visit=2017-12-22     
+    Create Session              github               http://api.github.com     cookies=${cookies}        
+    ${resp}=                    Get Request          github                    /                         
+    Should Be Equal As Strings  ${resp.status_code}  200
+```
 
 For more examples see the `tests` folder which contains testcase files that is used to test the keywords in this library against [httpbin.org](http://httpbin.org).
 
@@ -76,13 +77,10 @@ For more examples see the `tests` folder which contains testcase files that is u
 
 For individual keyword documentation see the following:
 
-[Keywords documentation](/doc/RequestsLibrary.html)
-
-You can update the documentation once checked out by going to the top directory of this repo and issuing the following command:
-``bash
-python -m robot.libdoc src/RequestsLibrary doc/RequestsLibrary.html
-``
+[Keywords documentation](https://bulkan.github.io/robotframework-requests/doc/RequestsLibrary.html)
 
 # Help
 
-Send your questions to the [Robot Framework Users Group](https://groups.google.com/forum/#!forum/robotframework-users)
+Send your questions to the 
+- [Robot Framework Users Group](https://groups.google.com/forum/#!forum/robotframework-users)
+- [Robot Framework Slack #requests channel](https://robotframework-slack-invite.herokuapp.com/)
