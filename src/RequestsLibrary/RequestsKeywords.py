@@ -601,7 +601,10 @@ class RequestsKeywords(object):
             allow_redirects=None,
             timeout=None,
             fail_on_error=None):
-        """ Send a GET request on the session object found using the
+        """
+        *DEPRECATED in 0.8 use `GET On Session` keyword*
+
+        Send a GET request on the session object found using the
         given `alias`
 
         ``alias`` that will be used to identify the Session object in the cache
@@ -679,7 +682,10 @@ class RequestsKeywords(object):
             allow_redirects=None,
             timeout=None,
             fail_on_error=None):
-        """ Send a POST request on the session object found using the
+        """
+        *DEPRECATED in 0.8 use `POST On Session` keyword*
+
+        Send a POST request on the session object found using the
         given `alias`
 
         ``alias`` that will be used to identify the Session object in the cache
@@ -763,7 +769,10 @@ class RequestsKeywords(object):
             allow_redirects=None,
             timeout=None,
             fail_on_error=None):
-        """ Send a PATCH request on the session object found using the
+        """
+        *DEPRECATED in 0.8 use `PATCH On Session` keyword*
+
+        Send a PATCH request on the session object found using the
         given `alias`
 
         ``alias`` that will be used to identify the Session object in the cache
@@ -846,7 +855,10 @@ class RequestsKeywords(object):
             allow_redirects=None,
             timeout=None,
             fail_on_error=None):
-        """ Send a PUT request on the session object found using the
+        """
+        *DEPRECATED in 0.8 use `PUT On Session` keyword*
+
+        Send a PUT request on the session object found using the
         given `alias`
 
         ``alias`` that will be used to identify the Session object in the cache
@@ -938,7 +950,10 @@ class RequestsKeywords(object):
             allow_redirects=None,
             timeout=None,
             fail_on_error=None):
-        """ Send a DELETE request on the session object found using the
+        """
+        *DEPRECATED in 0.8 use `DELETE On Session` keyword*
+
+        Send a DELETE request on the session object found using the
         given `alias`
 
         ``alias`` that will be used to identify the Session object in the cache
@@ -983,7 +998,10 @@ class RequestsKeywords(object):
             allow_redirects=None,
             timeout=None,
             fail_on_error=None):
-        """ Send a HEAD request on the session object found using the
+        """
+        *DEPRECATED in 0.8 use `HEAD On Session` keyword*
+
+        Send a HEAD request on the session object found using the
         given `alias`
 
         ``alias`` that will be used to identify the Session object in the cache
@@ -1044,7 +1062,10 @@ class RequestsKeywords(object):
             allow_redirects=None,
             timeout=None,
             fail_on_error=None):
-        """ Send an OPTIONS request on the session object found using the
+        """
+        *DEPRECATED in 0.8 use `OPTIONS On Session` keyword*
+
+        Send an OPTIONS request on the session object found using the
         given `alias`
 
         ``alias`` that will be used to identify the Session object in the cache
