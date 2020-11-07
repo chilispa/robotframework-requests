@@ -134,7 +134,9 @@ def warn_if_equal_symbol_in_url(func):
             pass
 
         if not positional_url and 'url' not in kwargs:
-            logger.warn("FIXME!!")
+            logger.warn("You might have an = symbol in url."
+                        "\nYou better place 'url=' before, example: url=/your-url/foo?param=a"
+                        "\nor use  /your-url/foo  params=param=a or in escape it")
 
         return func(*args, **kwargs)
     return decorator
